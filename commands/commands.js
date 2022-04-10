@@ -10,9 +10,9 @@ const apiEndpoints = {
   maps: "/gamedata/maps/public"
 }
 
-module.exports = class Commands {
+let globalMapsStr = "";
 
-  mapsStr = "";
+module.exports = class Commands {
 
   constructor() {}
 
@@ -84,7 +84,7 @@ module.exports = class Commands {
 
             const mapsStr = await this.getMaps(gatherableName);
 
-            exampleEmbed.addField('Mapas', this.mapsStr, true);
+            exampleEmbed.addField('Mapas', globalMapsStr, true);
 
             let gatherableStr = "";
             gatherable.Rewards.forEach(material => {
@@ -198,9 +198,9 @@ module.exports = class Commands {
         })
 
         if (matchedMaps.length > 0) {
-          this.mapsStr = mapsStr;
+          globalMapsStr = mapsStr;
         } else {
-          this.mapsStr = "Não foi encontrado nenhum mapa com esse material, verifique se foi digitado corretamente. Atualmente apenas os nomes em inglês são suportados.";
+          globalMapsStr = "Não foi encontrado nenhum mapa com esse material, verifique se foi digitado corretamente. Atualmente apenas os nomes em inglês são suportados.";
         }
     })
   }
